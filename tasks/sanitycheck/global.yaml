@@ -1,0 +1,5 @@
+---
+- name: Verify auditd is running
+  service:
+    name: auditd
+    state: started

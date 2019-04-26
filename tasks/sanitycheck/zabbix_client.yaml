@@ -1,0 +1,5 @@
+---
+- name: Verify zabbix-agent is running
+  service: 
+    name: zabbix-agent
+    state: started

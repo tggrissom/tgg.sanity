@@ -1,0 +1,5 @@
+---
+- name: Verify splunk-forwarder is running
+  service:
+    name: SplunkForwarder
+    state: started

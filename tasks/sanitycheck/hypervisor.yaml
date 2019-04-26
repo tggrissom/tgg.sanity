@@ -1,0 +1,4 @@
+---
+- name: Hypervisor Sanity
+  debug:
+    msg: "hypervisor_sanity"

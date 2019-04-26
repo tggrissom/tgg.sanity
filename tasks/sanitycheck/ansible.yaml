@@ -1,0 +1,4 @@
+---
+- name: Ansible Sanity
+  debug:
+    msg: "ansible_sanity"

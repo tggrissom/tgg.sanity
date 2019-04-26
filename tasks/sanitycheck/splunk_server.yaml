@@ -1,0 +1,5 @@
+---
+- name: Verify splunk_server is running
+  service:
+    name: splunk
+    state: started

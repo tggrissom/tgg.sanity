@@ -1,0 +1,10 @@
+---
+- name: Verify zabbix-server is running
+  service: 
+    name: zabbix-server
+    state: started
+
+- name: Verify httpd is running
+  service: 
+    name: httpd
+    state: started

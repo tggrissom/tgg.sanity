@@ -1,0 +1,35 @@
+---
+- name: sanity check
+  block:
+    - name: Global Sanitycheck
+      block:
+      - name: Does Global Sanitycheck Exists
+        local_action: stat path="{{ role_path }}/tasks/sanitycheck/global.yaml"
+        register: global_sanity_stat_result
+
+      - name: Run Global Sanitycheck
+        include_tasks: "{{ role_path }}/tasks/sanitycheck/global.yaml"
+        when: global_sanity_stat_result.stat.exists == True
+
+    - name: Group Sanity Check
+      block:
+        - name: check Group Pre-Patch Senaity exists
+          local_action: stat path="{{ role_path }}/tasks/sanitycheck/{{ item }}.yaml" 
+          register: group_prepatch_sanity_stat_result
+          with_items: "{{ group_names }}"
+
+        - name: Run Group sanity
+          include_tasks: "{{ item.stat.path }}"
+          with_items: "{{ group_prepatch_sanity_stat_result.results }}"
+          when: item.stat.exists == True
+
+    - name: Host Sanitycheck
+      block:
+
+      - name: Host Sanitycheck exist
+        local_action: stat path="{{ role_path }}/tasks/sanitycheck/{{ inventory_hostname }}.yaml"
+        register: host_sanity_stat_result
+
+      - name: Run Host Sanitycheck
+        include_tasks: "{{ role_path }}/tasks/sanitycheck/{{ inventory_hostname }}.yaml"
+        when: host_sanity_stat_result.stat.exists == True

@@ -1,0 +1,5 @@
+---
+- name: Verify freeipa-agent is running
+  service:
+    name: sssd
+    state: started

@@ -1,0 +1,15 @@
+---
+- name: Centos specific Sanity
+  block:
+  - name: Verify firewalld is running
+    service: 
+      name: firewalld
+      state: started
+- name: Verify ntpd is running
+  service:
+    name: ntpd
+    state: started
+- name: check Selinux status
+  selinux:
+    policy: targeted
+    state: enforcing
